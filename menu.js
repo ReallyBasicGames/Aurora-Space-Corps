@@ -126,3 +126,8 @@ function timeToString()
 
   return hours.toString() + " hours, " + minutes.toString() + " minutes and " + seconds.toString() + " seconds";
 }
+
+function goToGithub()
+{
+  window.location.href="https://github.com/ReallyBasicGames/Space-Blast";
+}

@@ -18,6 +18,7 @@ var countBulletInc = 1000;
 
 var player;
 
+var ending = false;
 
 function preload() {
   // load small fighters
@@ -44,8 +45,8 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth-40, windowHeight-40);
+  gamesPlayed ++;
   engine = Engine.create();
-
   world = engine.world;
   engine.world.gravity.y = 0;
   Engine.run(engine);
@@ -56,33 +57,33 @@ function setup() {
   createFactoryShips();
 }
 
-function mouseDragged(){
-  if(!debugging) return;
-  // pick a random team, and create a ship corresponding to that team
-  var randomInt = int(random(teams.length));
-  var color = teams[randomInt];
-  var randomType = -1;//int(random(0,2));
-  switch(randomType)
+function gameEnd()
+{
+  if(ending) return;
+  if(currentFactories > 1) return;
+  ending = true;
+  timePlayed = getItem("timePlayed");
+  timePlayed += millis();
+  storeItem("timePlayed", timePlayed);
+  gamesPlayed = getItem("gamesPlayed");
+  gamesPlayed ++;
+  storeItem("gamesPlayed", gamesPlayed);
+  wins = getItem("wins");
+  ties = getItem("ties");
+  if(player != null)
   {
-    case 0:
-      shipHandler.makeShip("small", color, mouseX, mouseY);
-      if(debugging)
-        console.log("made fighter");
-      break;
-    case 1:
-      shipHandler.makeShip("medium", color, mouseX, mouseY);
-      if(debugging)
-        console.log("made bomber");
-      break;
-    default:
-      shipHandler.makeShip("default", color, mouseX, mouseY);
-      console.log("made ship - ERROR! THIS SHOULD NOT HAVE HAPPENED");
-      break;
+    wins ++;
+    storeItem("wins", wins);
   }
+  if(currentFactories == 0) {
+    ties ++;
+    storeItem("ties", ties);
+  }
+  window.location.href="main_menu.html";
 }
 
 function draw() {
-
+  gameEnd();
   update();
   background(51);
   // draw bullets below ships
@@ -168,8 +169,8 @@ function startUnfair()
 
 function createFactoryShips()
 {
-  shipHandler.makeShip("factory", teams[0], 50, height/2, true);
-  shipHandler.makeShip("factory", teams[3], width-50, height/2, false);
+  shipHandler.makeShip("factory", teams[0], 100, height/2, true);
+  shipHandler.makeShip("factory", teams[3], width-100, height/2, false);
   setPlayerColor();
 }
 

@@ -39,6 +39,8 @@ class FactoryShip extends Ship{
     this.extraHealth = 1; // multiplative
 
     this.priceMulti = 2.5;
+
+    currentFactories ++;
   }
 
   getPricesShips()
@@ -54,6 +56,12 @@ class FactoryShip extends Ship{
   getPlayerControlled()
   {
     return this.isPlayerControlled;
+  }
+
+  shipDestroy()
+  {
+    super.shipDestroy();
+    currentFactories --;
   }
 
   update()
@@ -88,46 +96,46 @@ class FactoryShip extends Ship{
       if(this.shipsBuilt[0]/2 <= this.shipsBuilt[1])
       {
         this.buy("small");
-        if(!this.isPlayerControlled) console.log("buying small");
+        //if(!this.isPlayerControlled) console.log("buying small");
       }
       else if(this.shipsBuilt[1]/4 <= this.shipsBuilt[2])
       {
         if(this.upgradesGotten[0] * 6 < this.shipsBuilt[1])
         {
           this.upgrade("damage");
-          if(!this.isPlayerControlled) console.log("upgrade damage");
+          //if(!this.isPlayerControlled) console.log("upgrade damage");
         }
         else {
           this.buy("medium");
-          if(!this.isPlayerControlled) console.log("buying medium");
+          //if(!this.isPlayerControlled) console.log("buying medium");
         }
       }
       else if(this.shipsBuilt[2] <= this.shipsBuilt[3] * 4)
       {
         if(this.upgradesGotten[2] < 1) {
           this.upgrade("power");
-          if(!this.isPlayerControlled) console.log("upgrading power");
+          //if(!this.isPlayerControlled) console.log("upgrading power");
         }
         else if(this.shipsBuilt[2] > this.upgradesGotten[1])
         {
           this.upgrade("health");
-          if(!this.isPlayerControlled) console.log("upgrading health");
+          //if(!this.isPlayerControlled) console.log("upgrading health");
         }
         else {
           this.buy("large");
-          if(!this.isPlayerControlled) console.log("buying large");
+          //if(!this.isPlayerControlled) console.log("buying large");
         }
       }
       else {
         if(this.upgradesGotten[2] < 3 || this.upgradesGotten < this.shipsBuilt[3] * 2)
         {
           this.upgrade("power");
-          if(!this.isPlayerControlled) console.log("upgrading power");
+          //if(!this.isPlayerControlled) console.log("upgrading power");
         }
         else {
 
           this.buy("boss");
-          if(!this.isPlayerControlled) console.log("buying boss");
+          //if(!this.isPlayerControlled) console.log("buying boss");
         }
       }
 

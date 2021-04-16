@@ -32,10 +32,9 @@ h1 {
   font-family: "Zen Dots script=latin rev=2"; font-style: normal; line-height: 1.2;
 }
 
-
- body {
-   background-color: #222222;
-   margin: auto;
+body {
+  background-color: #222222;
+  margin: auto;
  }
 
 .container {

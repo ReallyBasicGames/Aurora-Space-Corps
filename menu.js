@@ -92,6 +92,7 @@ function clearStats()
   storeItem("wins", 0);
   storeItem("gamesPlayed", 0);
   storeItem("ties", 0);
+  loadStats();
 }
 
 function loadStats()

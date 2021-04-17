@@ -19,7 +19,7 @@ function windowResized() {
 
 function play()
 {
-  window.location.href="index.html";
+  window.location.href="game.html";
 }
 
 var displayingControls = false;

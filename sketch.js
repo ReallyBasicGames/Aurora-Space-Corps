@@ -72,12 +72,19 @@ function gameEnd()
   ties = getItem("ties");
   if(player != null)
   {
-    wins ++;
-    storeItem("wins", wins);
+    if(wins == null) storeItem("wins", 1);
+    else {
+      wins ++;
+      storeItem("wins", wins);
+    }
   }
   if(currentFactories == 0) {
     ties ++;
     storeItem("ties", ties);
+  }
+  else {
+    if(ties == null) storeItem("ties", 0);
+    else storeItem("ties", ties);
   }
   window.location.href="main_menu.html";
 }

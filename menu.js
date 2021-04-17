@@ -97,15 +97,24 @@ function clearStats()
 function loadStats()
 {
   wins = getItem('wins');
-  console.log(wins.toString());
+  if(wins == null) {
+    wins = 0;
+    storeItem("wins", wins);
+  }
   gamesPlayed = getItem('gamesPlayed');
-  console.log(gamesPlayed.toString());
-  timePlayed = getItem('timePlayed');
-  console.log(timePlayed.toString());
+  if(gamesPlayed == null) {
+    gamesPlayed = 0;
+    storeItem("gamesPlayed", gamesPlayed);
+  }
   ties = getItem('ties');
-  console.log(ties.toString());
-  if(ties == null || gamesPlayed == null || timePlayed == null || wins == null) {
-    clearStats();
+  if(ties == null) {
+    ties = 0;
+    storeItem("ties", ties);
+  }
+  timePlayed = getItem('timePlayed');
+  if(timePlayed == null) {
+    timePlayed = 0;
+    storeItem("timePlayed", timePlayed);
   }
 }
 

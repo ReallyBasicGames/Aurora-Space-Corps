@@ -7,3 +7,4 @@ Instructions on how to play are in the game.
 
 Inspired by [Pax Britannica](https://github.com/henkboom/pax-britannica).
 
+[PLAY](https://reallybasicgames.github.io/Space-Blast/)

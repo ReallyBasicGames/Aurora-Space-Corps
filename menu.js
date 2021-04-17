@@ -8,7 +8,6 @@ function setup()
   var y = 500;
   cnv.position(x, y);
   background(0);
-  if(timePlayed == null) clearStats();
 }
 
 function windowResized() {

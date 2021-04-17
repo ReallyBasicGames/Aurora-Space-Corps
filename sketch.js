@@ -70,6 +70,10 @@ function gameEnd()
   storeItem("gamesPlayed", gamesPlayed);
   wins = getItem("wins");
   ties = getItem("ties");
+  shipsBuilt += getItem("shipsBuilt");
+  shipsDestroyed += getItem("shipsDestroyed");
+  storeItem("shipsBuilt", shipsBuilt);
+  storeItem("shipsDestroyed", shipsDestroyed);
   if(player != null)
   {
     if(wins == null) storeItem("wins", 1);

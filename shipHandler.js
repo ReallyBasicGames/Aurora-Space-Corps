@@ -108,6 +108,7 @@ function ShipHandler()
 
   this.removeShip = function(ship)
   {
+
     switch(ship.getTeam())
     {
       case "red":
@@ -123,6 +124,7 @@ function ShipHandler()
         this.blueShips[ship.getID()] = null;
         break;
     }
+    if(player.getTeam() != ship.getTeam()) shipsDestroyed ++;
   }
 
   this.getEnemies = function(team)

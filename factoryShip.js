@@ -259,7 +259,7 @@ class FactoryShip extends Ship{
           shipHandler.makeShip("small", this.team, this.body.position.x, this.body.position.y, false, this.extraDamage, this.extraHealth);
           this.lastSpent = millis();
           this.shipsBuilt[0] ++;
-          //if(!this.isPlayerControlled) console.log("buying small");
+          if(this.isPlayerControlled) shipsBuilt ++;
         }
         break;
       case "medium":
@@ -268,7 +268,7 @@ class FactoryShip extends Ship{
           shipHandler.makeShip("medium", this.team, this.body.position.x, this.body.position.y, false, this.extraDamage, this.extraHealth);
           this.lastSpent = millis();
           this.shipsBuilt[1] ++;
-          //if(!this.isPlayerControlled) console.log("buying medium");
+          if(this.isPlayerControlled) shipsBuilt ++;
         }
         break;
       case "large":
@@ -277,7 +277,7 @@ class FactoryShip extends Ship{
           shipHandler.makeShip("large", this.team, this.body.position.x, this.body.position.y, false, this.extraDamage, this.extraHealth);
           this.lastSpent = millis();
           this.shipsBuilt[2] ++;
-          //if(!this.isPlayerControlled) console.log("buying large");
+          if(this.isPlayerControlled) shipsBuilt ++;
         }
         break;
       case "boss":
@@ -286,7 +286,7 @@ class FactoryShip extends Ship{
           shipHandler.makeShip("boss", this.team, this.body.position.x, this.body.position.y, false, this.extraDamage, this.extraHealth);
           this.lastSpent = millis();
           this.shipsBuilt[3] ++;
-
+          if(this.isPlayerControlled) shipsBuilt ++;
         }
         break;
 

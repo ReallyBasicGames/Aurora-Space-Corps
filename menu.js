@@ -75,7 +75,7 @@ function getStats()
     // show the controls for the game
     textSize(16);
     fill(255);
-    text("Win / Game Ratio: " + wins.toString() + " / " + gamesPlayed.toString()+"\nTies: " + ties.toString() + "\nTime Played: " + timeToString(), 20, 20, width-20, height-20);
+    text("Win / Game Ratio: " + wins.toString() + " / " + gamesPlayed.toString()+"\nTies: " + ties.toString() + "\nTime Played: " + timeToString() + "\nShips Destroyed: " + shipsDestroyed.toString() + "\nShips Built: " + shipsBuilt.toString(), 20, 20, width-20, height-20);
   }
   else {
     displayingStats = false;
@@ -91,6 +91,8 @@ function clearStats()
   storeItem("wins", 0);
   storeItem("gamesPlayed", 0);
   storeItem("ties", 0);
+  storeItem("shipsBuilt", 0);
+  storeItem("shipsDestroyed", 0);
   loadStats();
 }
 
@@ -115,6 +117,16 @@ function loadStats()
   if(timePlayed == null) {
     timePlayed = 0;
     storeItem("timePlayed", timePlayed);
+  }
+  shipsDestroyed = getItem('shipsDestroyed');
+  if(shipsDestroyed == null) {
+    shipsDestroyed = 0;
+    storeItem("shipsDestroyed", shipsDestroyed);
+  }
+  shipsBuilt = getItem('shipsBuilt');
+  if(shipsBuilt == null) {
+    shipsBuilt = 0;
+    storeItem("shipsBuilt", shipsBuilt);
   }
 }
 

@@ -9,6 +9,9 @@ let wins = 0;
 let gamesPlayed = 0;
 let timePlayed = 0;
 let ties = 0;
+let shipsDestroyed = 0;
+let shipsBuilt = 0;
+
 
 // the amount of factory ships currently in play
 // if this number becomes 1 or less, the game is over

@@ -6,36 +6,36 @@ function ShipHandler()
   this.blueShips = [];
   this.teams = ["red", "yellow", "green", "blue"];
 
-  this.makeShip = function(shipType, team, x, y, isPlayer, damageBonus, healthBonus)
+  this.makeShip = function(shipType, team, x, y, isPlayer, damageBonus, healthBonus, image)
   {
     switch(shipType)
     {
       case "small":
-        var tempShip = new Small(x,y,team);
+        var tempShip = new Small(x,y,team, image);
         this.addShip(tempShip);
         tempShip.changeHealth(healthBonus);
         tempShip.changeDamage(damageBonus);
         break;
       case "medium":
-        var tempShip = new Medium(x,y,team);
+        var tempShip = new Medium(x,y,team, image);
         this.addShip(tempShip);
         tempShip.changeHealth(healthBonus);
         tempShip.changeDamage(damageBonus);
         break;
       case "large":
-        var tempShip = new Large(x,y,team);
+        var tempShip = new Large(x,y,team, image);
         this.addShip(tempShip);
         tempShip.changeHealth(healthBonus);
         tempShip.changeDamage(damageBonus);
         break;
       case "boss":
-        var tempShip = new Boss(x,y,team);
+        var tempShip = new Boss(x,y,team, image);
         this.addShip(tempShip);
         tempShip.changeHealth(healthBonus);
         tempShip.changeDamage(damageBonus);
         break;
       case "factory":
-        var tempShip = new FactoryShip(x,y,team)
+        var tempShip = new FactoryShip(x,y,team, image)
         this.addShip(tempShip);
         tempShip.setPlayerControlled(isPlayer);
         if(isPlayer) player = tempShip;

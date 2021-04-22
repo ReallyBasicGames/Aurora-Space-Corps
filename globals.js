@@ -1,3 +1,4 @@
+// the images that are stored upon loading
 let smallFighterImg = [];
 let medFighterImg = [];
 let largeFighterImg = [];
@@ -17,3 +18,8 @@ let shipsBuilt = 0;
 // if this number becomes 1 or less, the game is over
 // and the player is taken back to the menu screen
 let currentFactories = 0;
+
+// graphics level, 0 for low graphics, 1 for high graphics
+let graphicsLevel = 1;
+// sound level, 0 for no sounds, 1 for all sounds
+let soundLevel = 0;

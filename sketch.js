@@ -20,27 +20,46 @@ var player;
 
 var ending = false;
 
+var bgMusic;
+
 function preload() {
   // load small fighters
   for(var i = 0; i < 4; i++)
   {
-    smallFighterImg.push(loadImage('images/small_' + i.toString() + '.png'));
+    smallFighterImg.push(loadImage('/images/small_' + i.toString() + '.png'));
   }
   // load medium fighters
   for(var i = 0; i < 4; i++)
   {
-    medFighterImg.push(loadImage("images/medium_" + i.toString() + ".png"));
+    medFighterImg.push(loadImage("/images/medium_" + i.toString() + ".png"));
   }
   // load large fighters
   for(var i = 0; i < 4; i++)
   {
-    largeFighterImg.push(loadImage("images/large_" + i.toString() + ".png"));
+    largeFighterImg.push(loadImage("/images/large_" + i.toString() + ".png"));
   }
   // load boss fighters
   for(var i = 0; i < 4; i++)
   {
-    bossFighterImg.push(loadImage("images/boss_" + i.toString() + ".png"));
+    bossFighterImg.push(loadImage("/images/boss_" + i.toString() + ".png"));
   }
+
+  bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
+}
+
+function loadOptions() {
+    var x = document.getElementById("graphicsButton");
+    graphicsLevel = getItem('graphicsLevel');
+    if (graphicsLevel == null) {
+        graphicsLevel = 0;
+        storeItem("graphicsLevel", graphicsLevel);
+    }
+    var y = document.getElementById("soundButton");
+    soundLevel = getItem('soundLevel');
+    if (soundLevel == null) {
+        soundLevel = 0;
+        storeItem("soundLevel", soundLevel);
+    }
 }
 
 function setup() {
@@ -52,9 +71,12 @@ function setup() {
   Engine.run(engine);
   shipHandler = new ShipHandler();
   bulletHandler = new BulletHandler();
+  loadOptions();
   //startDebugGame();
   //startUnfair();
-  createFactoryShips();
+  //createFactoryShips();
+  testImages();
+  if(soundLevel == 1) bgMusic.play();
 }
 
 function gameEnd()
@@ -183,6 +205,18 @@ function createFactoryShips()
   shipHandler.makeShip("factory", teams[0], 100, height/2, true);
   shipHandler.makeShip("factory", teams[3], width-100, height/2, false);
   setPlayerColor();
+}
+
+function testImages()
+{
+    currentFactories = 2;
+    //function(shipType, team, x, y, isPlayer, damageBonus, healthBonus, image)
+    shipHandler.makeShip('default', teams[0], 100, 100, false, 0, 1, smallFighterImg[0]);
+    shipHandler.makeShip('small', teams[0], 200, 100, false, 0, 1, smallFighterImg[0]);
+    shipHandler.makeShip('medium', teams[0], 300, 100, false, 0, 1, medFighterImg[0]);
+    shipHandler.makeShip('large', teams[0], 400, 100, false, 0, 1, largeFighterImg[0]);
+    shipHandler.makeShip('boss', teams[0], 500, 100, false, 0, 1, bossFighterImg[0]);
+    shipHandler.makeShip("factory", teams[0], 600, height/2, true, 0, 1, bossFighterImg[0]);
 }
 
 

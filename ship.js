@@ -109,9 +109,11 @@ class Ship
     push();
     translate(pos.x,pos.y);
     rotate(this.body.angle);
-    rectMode(CENTER);
-    //image(this.image, -this.w/2,-this.h/2,this.w,this.h);
-    rect(0, 0,this.w,this.h);
+    if(graphicsLevel == 1) image(this.image, -this.w/2,-this.h/2,this.w,this.h);
+    else {
+        rectMode(CENTER);
+        rect(0, 0,this.w,this.h);
+    }
     pop();
   }
 

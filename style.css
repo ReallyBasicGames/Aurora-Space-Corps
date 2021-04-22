@@ -38,7 +38,7 @@ body {
  }
 
 .container {
-   height: 200px;
+   height: 150px;
    position: relative;
  }
 
@@ -52,7 +52,6 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  float: left;
   font-family: "Zen Dots script=latin rev=2"; font-style: normal; line-height: 1.2;
 }
 .container .option {
@@ -65,18 +64,17 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  float: left;
   font-family: "Zen Dots script=latin rev=2"; font-style: normal; line-height: 1.2;
 }
 
 .container .button:hover {
-  border: 8px solid #AAAAAA; /* Green */
+  border: 8px solid #AAAAAA;
   background-color: #FFFFFF;
   color: black;
 }
 
 .container .option:hover {
-  border: 8px solid #AAAAAA; /* Green */
+  border: 8px solid #AAAAAA;
   background-color: #FFFFFF;
   color: black;
 }

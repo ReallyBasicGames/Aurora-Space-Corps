@@ -1,8 +1,8 @@
 class Small extends Ship
 {
-  constructor(x, y, team)
+  constructor(x, y, team, image)
   {
-    super(x, y, team);
+    super(x, y, team, image);
     this.health = 5; // how much health this has. Standard bullets deal 1 damage
     this.accel = 0.008;
     this.angleAccel = 0.075; // how fast this object accelerates rotationally
@@ -43,8 +43,11 @@ class Small extends Ship
     push();
     translate(pos.x,pos.y);
     rotate(this.body.angle);
-    rectMode(CENTER);
-    rect(0, 0,this.w,this.h);
+    if(graphicsLevel == 1) image(this.image, -this.w/2,-this.h/2,this.w,this.h);
+    else {
+        rectMode(CENTER);
+        rect(0, 0,this.w,this.h);
+    }
     pop();
   }
 

@@ -7,7 +7,9 @@ function setup() {
     var y = 500;
     cnv.position(x, y);
     background(0);
-    if(window.location.href=="options.html") loadOptions();
+    loadOptions();
+    document.getElementById("bgMusic").volume = 1;
+    document.getElementById("bgMusic").controls = false;
 }
 
 function windowResized() {
@@ -156,13 +158,17 @@ function loadOptions() {
     if (graphicsLevel == null) {
         graphicsLevel = 0;
         storeItem("graphicsLevel", graphicsLevel);
-        x.innerHTML
     }
     soundLevel = getItem('soundLevel');
     if (soundLevel == null) {
         soundLevel = 0;
         storeItem("soundLevel", soundLevel);
     }
+    if(window.location.href=="options.html") loadOptionText();
+}
+
+function loadOptionText()
+{
     // updating text
     if (graphicsLevel == 0) {
         document.getElementById("graphicsButton").innerHTML = "GRAPHICS OFF";
@@ -170,7 +176,7 @@ function loadOptions() {
     else {
         document.getElementById("graphicsButton").innerHTML = "GRAPHICS ON";
     }
-    if (graphicsLevel == 0) {
+    if (soundLevel == 0) {
         document.getElementById("soundButton").innerHTML = "SOUND OFF";
     }
     else {

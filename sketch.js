@@ -43,23 +43,29 @@ function preload() {
   {
     bossFighterImg.push(loadImage("/images/boss_" + i.toString() + ".png"));
   }
-
+    alert("loading music");
   bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
+  if(bgMusic == null) console.log("there was no bgMusic");
 }
 
 function loadOptions() {
-    var x = document.getElementById("graphicsButton");
     graphicsLevel = getItem('graphicsLevel');
     if (graphicsLevel == null) {
         graphicsLevel = 0;
         storeItem("graphicsLevel", graphicsLevel);
     }
-    var y = document.getElementById("soundButton");
     soundLevel = getItem('soundLevel');
     if (soundLevel == null) {
         soundLevel = 0;
         storeItem("soundLevel", soundLevel);
     }
+
+    if(soundLevel == 1) {
+        alert("playing music");
+        console.log("playing music");
+        bgMusic.play();
+    }
+    else alert("sound is disabled");
 }
 
 function setup() {
@@ -76,7 +82,7 @@ function setup() {
   //startUnfair();
   //createFactoryShips();
   testImages();
-  if(soundLevel == 1) bgMusic.play();
+  
 }
 
 function gameEnd()

@@ -1,4 +1,12 @@
 let cnv;
+let bgMusic;
+
+function preload()
+{
+    console.log("loading music...");
+    bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
+    if (bgMusic == null) alert("there was no bgMusic");
+}
 
 function setup() {
     cnv = createCanvas(600, 200);
@@ -8,8 +16,7 @@ function setup() {
     cnv.position(x, y);
     background(0);
     loadOptions();
-    document.getElementById("bgMusic").volume = 1;
-    document.getElementById("bgMusic").controls = false;
+    if(soundLevel == 1) bgMusic.play();
 }
 
 function windowResized() {

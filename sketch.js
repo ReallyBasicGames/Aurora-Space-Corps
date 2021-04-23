@@ -23,8 +23,6 @@ var player;
 
 var ending = false;
 
-var bgMusic;
-
 function preload() {
     console.log("loading images...");
     // load small fighters
@@ -45,7 +43,8 @@ function preload() {
     }
     console.log("loading music...");
     bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
-    if (bgMusic == null) alert("there was no bgMusic");
+    clickEffect = loadSound("sounds/click1.ogg");
+    bulletEffect = loadSound("sounds/laser3.ogg");
 }
 
 function loadOptions() {
@@ -59,12 +58,7 @@ function loadOptions() {
         soundLevel = 0;
         storeItem("soundLevel", soundLevel);
     }
-    if (soundLevel == 1) {
-        bgMusic.play();
-    }
-    else {
-
-    }
+    if (soundLevel == 1) bgMusic.play();
 }
 
 function setup() {
@@ -81,7 +75,6 @@ function setup() {
     //startUnfair();
     createFactoryShips();
     //testImages();
-
 }
 
 function gameEnd() {
@@ -131,6 +124,7 @@ function draw() {
 }
 
 function update() {
+    if(!bgMusic.isPlaying()) bgMusic.play();
     shipHandler.update();
     bulletHandler.update();
     if (debugging && millis() - bulletTime > countBulletInc) {

@@ -23,3 +23,22 @@ let currentFactories = 0;
 let graphicsLevel = 1;
 // sound level, 0 for no sounds, 1 for all sounds
 let soundLevel = 0;
+
+
+// -------- sounds ---------------
+
+let bgMusic;
+
+
+// effects MENU
+let clickEffect;
+
+
+// effects GAME
+let bulletEffect;
+let bulletSize = [0.2, 0.4, 0.6, 0.6];
+let explosionEffect;
+let explosionSize = [0.2, 0.4, 0.6, 0.8, 1];
+let engineEffect;
+
+

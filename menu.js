@@ -1,11 +1,11 @@
 let cnv;
-let bgMusic;
 
 function preload()
 {
     console.log("loading music...");
+    soundFormats('ogg');
     bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
-    if (bgMusic == null) alert("there was no bgMusic");
+    clickEffect = loadSound("sounds/click1.ogg");
 }
 
 function setup() {
@@ -19,6 +19,11 @@ function setup() {
     if(soundLevel == 1) bgMusic.play();
 }
 
+function draw()
+{
+    if(!bgMusic.isPlaying()) bgMusic.play();
+}
+
 function windowResized() {
     var x = (windowWidth - width) / 2;
     var y = 500;
@@ -26,12 +31,14 @@ function windowResized() {
 }
 
 function play() {
+    if(soundLevel == 1) clickEffect.play();
     window.location.href = "game.html";
 }
 
 var displayingControls = false;
 
 function getControls() {
+    if(soundLevel == 1) clickEffect.play();
     background(0);
     if (!displayingControls) {
         displayingControls = true;
@@ -39,7 +46,7 @@ function getControls() {
         // show the controls for the game
         textSize(16);
         fill(255);
-        text("Use the arrow-keys or WASD to move your factory ship. Press 1, 2, 3 or 4 to build small, medium, large and boss ships (respectively). \n\nYou may also purchase upgrades by pressing keys 8, 9, or 0. Pressing 8 will increase your damage by 1 (additive). Pressing 9 will increase overall health of your fleet by 1.2 (multiplicative). Pressing 0 will increase you maximum power, as well as increase you power regeneration.", 20, 20, width - 30, height - 20);
+        text("Use the arrow-keys or WASD to move your factory ship. Press 1, 2, 3 or 4 to build small, medium, large and boss ships (respectively). \n\nYou may also purchase upgrades by pressing keys 8, 9, or 0. Pressing 8 will increase your damage by 1 (additive). Pressing 9 will increase overall health of your fleet by 1.2 (multiplicative). Pressing 0 will increase you maximum power, as well as increase your power regeneration.", 20, 20, width - 30, height - 20);
     }
     else {
         displayingControls = false;
@@ -48,10 +55,28 @@ function getControls() {
     displayingStats = false;
 
 }
+var displayingCredits = false;
+function getCredits()
+{
+    background(0);
+    if(displayingCredits)
+    {
+        displayingCredits = false;
+    }
+    else {
+        displayingCredits = true;
+        // show the credits for the game
+        textSize(16);
+        fill(255);
+        text("CREDITS:\n'Space Ambient Music' - ReallyBasicGames\nGraphics - ReallyBasicGames\nSound Effects: - Kenney (visit at https://www.kenney.nl/assets)", 20, 20, width - 30, height - 20);
+    }
+}
+
 
 var displayingStrats = false;
 
 function getStrats() {
+    if(soundLevel == 1) clickEffect.play();
     background(0);
     if (!displayingStrats) {
         displayingStrats = true;
@@ -70,6 +95,7 @@ function getStrats() {
 var displayingStats = false;
 
 function getStats() {
+    if(soundLevel == 1) clickEffect.play();
     loadStats();
     background(0);
     if (!displayingStrats) {
@@ -148,15 +174,18 @@ function timeToString() {
 }
 
 function goToGithub() {
+    if(soundLevel == 1) clickEffect.play();
     window.location.href = "https://github.com/ReallyBasicGames/Space-Blast";
 }
 
 function menu() {
+    if(soundLevel == 1) clickEffect.play();
     saveOptions();
     window.location.href = "main_menu.html";
 }
 
 function goToOptions() {
+    if(soundLevel == 1) clickEffect.play();
     window.location.href = "options.html";
 }
 
@@ -198,6 +227,7 @@ function saveOptions()
 }
 
 function graphics() {
+    if(soundLevel == 1) clickEffect.play();
     if (graphicsLevel == 0) {
         graphicsLevel = 1;
         document.getElementById("graphicsButton").innerHTML = "GRAPHICS ON";
@@ -211,9 +241,12 @@ function graphics() {
 function sound() {
     if (soundLevel == 0) {
         soundLevel = 1;
+        clickEffect.play();
+        if(!bgMusic.isPlaying()) bgMusic.play();
         document.getElementById("soundButton").innerHTML = "SOUND ON";
     }
     else {
+        bgMusic.stop();
         document.getElementById("soundButton").innerHTML = "SOUND OFF";
         soundLevel = 0;
     }

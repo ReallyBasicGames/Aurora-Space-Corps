@@ -1,0 +1,124 @@
+.item1 { 
+    grid-area: header; 
+    font-size: 128px;
+}
+.item2 { grid-area: menu; font-size: 30px;}
+.item3 { grid-area: main; font-size: 30px;}
+.item4 { grid-area: right; font-size: 30px;}
+.item5 { grid-area: footer; font-size: 30px;}
+.item6 { grid-area: canvas; font-size: 30px;}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu menu main main main right'
+    'menu menu footer footer footer footer'
+    'canvas canvas canvas canvas canvas canvas';
+  grid-gap: 10px;
+  background-color: #444444;
+  padding: 10px;
+}
+
+.grid-container > div {
+    background-color: #222222;
+    font-family: 'Orbitron', sans-serif;
+    color: #555555;
+    text-align: center;
+    padding: 00px 0;
+    
+}
+
+body {
+    color: white;
+  background-color: #222222;
+  margin: auto;
+  font-family: 'Orbitron', sans-serif;
+ }
+
+ .main {
+    width: 100%;
+    height: 100%;
+  transition-duration: 0.4s;
+  border: 8px solid #444444;
+  font-size: 64px;
+  background-color: #555555;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+}
+
+ .option {
+    width: 100%;
+    height: 33.333%;
+  transition-duration: 0.4s;
+  border: 8px solid #444444;
+  font-size: 16px;
+  background-color: #555555;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.table {
+    padding: 0px, 0px;
+    width: 100%;
+    display: table;
+}
+
+.footerButton {
+    width: 50%;
+    transition-duration: 0.4s;
+    border: 8px solid #444444;
+    font-size: 16px;
+    background-color: #555555;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: table-cell;
+    font-family: 'Orbitron', sans-serif;
+}
+
+ .menu {
+     width: 100%;
+  transition-duration: 0.4s;
+  border: 8px solid #444444;
+  font-size: 16px;
+  background-color: #555555;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.main:hover {
+  border: 8px solid #AAAAAA;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.option:hover {
+  border: 8px solid #AAAAAA;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.menu:hover {
+  border: 8px solid #AAAAAA;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.footerButton:hover {
+  border: 8px solid #AAAAAA;
+  background-color: #FFFFFF;
+  color: black;
+}

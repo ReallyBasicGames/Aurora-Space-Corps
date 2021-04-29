@@ -1,33 +1,33 @@
 let cnv;
+let viewportWidth;
 
 function preload()
 {
     console.log("loading music...");
-    soundFormats('ogg');
     bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
     clickEffect = loadSound("sounds/click1.ogg");
 }
 
 function setup() {
-    cnv = createCanvas(600, 200);
+    cnv = createCanvas(windowWidth-20, 200);
     cnv.style('display', 'block');
-    var x = (windowWidth - width) / 2;
-    var y = 500;
-    cnv.position(x, y);
+    cnv.parent("canvasDIV");
+    // var x = (windowWidth - width) / 2;
+    // cnv.position(x, cnv.position.y);
     background(0);
     loadOptions();
-    if(soundLevel == 1) bgMusic.play();
+    viewportWidth = windowWidth;
 }
 
 function draw()
 {
-    if(!bgMusic.isPlaying()) bgMusic.play();
+    if(!bgMusic.isPlaying() && soundLevel == 1) bgMusic.play();
 }
 
 function windowResized() {
-    var x = (windowWidth - width) / 2;
+    var x = (viewportWidth - width) / 2;
     var y = 500;
-    cnv.position(x, y);
+    resizeCanvas(width, 600);
 }
 
 function play() {
@@ -53,9 +53,11 @@ function getControls() {
     }
     displayingStrats = false;
     displayingStats = false;
+    displayingCredits = false;
 
 }
 var displayingCredits = false;
+
 function getCredits()
 {
     background(0);
@@ -70,6 +72,9 @@ function getCredits()
         fill(255);
         text("CREDITS:\n'Space Ambient Music' - ReallyBasicGames\nGraphics - ReallyBasicGames\nSound Effects: - Kenney (visit at https://www.kenney.nl/assets)", 20, 20, width - 30, height - 20);
     }
+    displayingControls = false;
+    displayingStats = false;
+    displayingStrats = false;
 }
 
 
@@ -90,6 +95,7 @@ function getStrats() {
     }
     displayingControls = false;
     displayingStats = false;
+    displayingCredits = false;
 }
 
 var displayingStats = false;
@@ -98,8 +104,8 @@ function getStats() {
     if(soundLevel == 1) clickEffect.play();
     loadStats();
     background(0);
-    if (!displayingStrats) {
-        displayingStats = false;
+    if (!displayingStats) {
+        displayingStats = true;
         // show the controls for the game
         textSize(16);
         fill(255);
@@ -110,6 +116,7 @@ function getStats() {
     }
     displayingControls = false;
     displayingStrats = false;
+    displayingCredits = false;
 }
 
 function clearStats() {
@@ -175,18 +182,7 @@ function timeToString() {
 
 function goToGithub() {
     if(soundLevel == 1) clickEffect.play();
-    window.location.href = "https://github.com/ReallyBasicGames/Space-Blast";
-}
-
-function menu() {
-    if(soundLevel == 1) clickEffect.play();
-    saveOptions();
-    window.location.href = "main_menu.html";
-}
-
-function goToOptions() {
-    if(soundLevel == 1) clickEffect.play();
-    window.location.href = "options.html";
+    window.open("https://github.com/ReallyBasicGames/Space-Blast", '_blank');
 }
 
 function loadOptions() {
@@ -197,10 +193,12 @@ function loadOptions() {
     }
     soundLevel = getItem('soundLevel');
     if (soundLevel == null) {
-        soundLevel = 0;
+        soundLevel = 1;
         storeItem("soundLevel", soundLevel);
     }
-    if(window.location.href=="options.html") loadOptionText();
+
+    if(soundLevel == 1) bgMusic.play();
+    loadOptionText();
 }
 
 function loadOptionText()
@@ -232,10 +230,16 @@ function graphics() {
         graphicsLevel = 1;
         document.getElementById("graphicsButton").innerHTML = "GRAPHICS ON";
     }
-    else {
+    else if(graphicsLevel == 1){
         graphicsLevel = 0;
         document.getElementById("graphicsButton").innerHTML = "GRAPHICS OFF";
     }
+    else
+    {
+        graphicsLevel = 1;
+        document.getElementById("graphicsButton").innerHTML = "GRAPHICS ON";
+    }
+    saveOptions();
 }
 
 function sound() {
@@ -250,4 +254,30 @@ function sound() {
         document.getElementById("soundButton").innerHTML = "SOUND OFF";
         soundLevel = 0;
     }
+    saveOptions();
+}
+
+function goToTest()
+{
+    window.location.href = "test.html";
+}
+
+function clearCookies()
+{
+    clearStats();
+    removeItem('graphicsLevel');
+    removeItem('soundLevel');
+    window.location.href = "test.html";
+}
+
+function goToTrello()
+{
+    if(soundLevel == 1) clickEffect.play();
+    window.open("https://trello.com/b/q7f7LnAK", '_blank');
+}
+
+function goToDiscord()
+{
+    if(soundLevel == 1) clickEffect.play();
+    window.open("https://discord.gg/DTVfmZdQ", '_blank');
 }

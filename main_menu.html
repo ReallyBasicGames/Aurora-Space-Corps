@@ -4,14 +4,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&display=swap');
+</style> 
 	<title>SPACE BLAST</title>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.10.0/matter.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/addons/p5.sound.js"></script>
-
-	<script language="javascript" type="text/javascript" src="menu.js"></script>
-    <script language="javascript" type="text/javascript" src="globals.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/addons/p5.sound.js"></script>
+    <script language="javascript" type="text/javascript" src="menu.js"></script>
+	<script language="javascript" type="text/javascript" src="globals.js"></script>
 </head>
 
 <body>
@@ -32,6 +34,16 @@
         <button class="option" onclick="getCredits()">CREDITS</button>
         <button class="option" onclick="goToGithub()">GITHUB</button>
       </div>
+    </div>
+    <div class="container">
+      <div class="center">
+        <button class="option" onclick="getStrats()">DISCORD</button>
+        <button class="option" onclick="getControls()">TRELLO</button>
+        <button class="option" onclick="goToTest()">TEST PAGE</button>
+      </div>
+    </div>
+    <div class="container" id="canvasDIV">
+        
     </div>
   </body>
 </html>

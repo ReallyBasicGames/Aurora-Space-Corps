@@ -108,7 +108,7 @@ function gameEnd() {
         if (ties == null) storeItem("ties", 0);
         else storeItem("ties", ties);
     }
-    window.location.href = "main_menu.html";
+    window.location.href = "test.html";
 }
 
 function draw() {
@@ -124,7 +124,7 @@ function draw() {
 }
 
 function update() {
-    if(!bgMusic.isPlaying()) bgMusic.play();
+    if(!bgMusic.isPlaying() && soundLevel == 1) bgMusic.play();
     shipHandler.update();
     bulletHandler.update();
     if (debugging && millis() - bulletTime > countBulletInc) {
@@ -187,8 +187,8 @@ function startUnfair() {
 }
 
 function createFactoryShips() {
-    shipHandler.makeShip("factory", teams[0], 100, height / 2, true);
-    shipHandler.makeShip("factory", teams[3], width - 100, height / 2, false);
+    shipHandler.makeShip("factory", teams[0], 100, height / 2, true, 0, 1, bossFighterImg[0]);
+    shipHandler.makeShip("factory", teams[3], width - 100, height / 2, false, 0, 1, bossFighterImg[3]);
     setPlayerColor();
 }
 

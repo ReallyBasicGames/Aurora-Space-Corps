@@ -114,7 +114,8 @@ function gameEnd() {
 function draw() {
     gameEnd();
     update();
-    background(51);
+    if(graphicsLevel == 1) background(51,51,51,100); // draw the background slightly transparent to add motion effects
+    else background(51); // draw the background slightly transparent to add motion effects
     // draw bullets below ships
     bulletHandler.draw();
     // draw ships

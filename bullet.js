@@ -2,34 +2,32 @@ class Bullet
 {
   constructor(x, y, angle, team)
   {
-    if(debugging)
-    {
-      this.damage = 50;
-    }
-    else {
-      this.damage = 1;
-    }
     this.damage = 1;
     this.team = team;
 
     this.w = 12;
     this.h = 2;
-    var options = {
-      mass: 10,
-      friction: 0, // (0, 1)
-      restitution: .6,// bounciness (0, 1)
-      isSensor: true,
-      frictionAir: 0
-    }
-    this.body = Bodies.rectangle(x,y,this.w,this.h, options);
+    this.position = {
+        x: x,
+        y: y
+    };
+    // var options = {
+    //   mass: 10,
+    //   friction: 0, // (0, 1)
+    //   restitution: .6,// bounciness (0, 1)
+    //   isSensor: true,
+    //   frictionAir: 0
+    // }
+    // this.body = Bodies.rectangle(x,y,this.w,this.h, options);
 
-    World.add(world, this.body);
-    Matter.Body.setAngle(this.body, angle);
-    Matter.Body.applyForce(this.body, this.body.position, {
-      x: cos(this.body.angle) * 0.5,
-      y: sin(this.body.angle) * 0.5
-    });
-
+    // World.add(world, this.body);
+    // Matter.Body.setAngle(this.body, angle);
+    // Matter.Body.applyForce(this.body, this.body.position, {
+    //   x: cos(this.body.angle) * 0.5,
+    //   y: sin(this.body.angle) * 0.5
+    // });
+    this.speed = 15;
+    this.angle = angle;
     this.id = 0;
     this.destroyed = false;
   }
@@ -51,6 +49,7 @@ class Bullet
 
   draw()
   {
+
     switch (this.team) {
       case "red":
         fill(255,105,97);
@@ -73,10 +72,9 @@ class Bullet
         stroke(0,0,0);
     }
     strokeWeight(1);
-    var pos = this.body.position;
     push();
-    translate(pos.x,pos.y);
-    rotate(this.body.angle);
+    translate(this.position.x,this.position.y);
+    rotate(this.angle);
     rectMode(CENTER);
     rect(0, -this.h/2,this.w,this.h);
     pop();
@@ -84,6 +82,8 @@ class Bullet
 
   update()
   {
+    this.position.x += Math.cos(this.angle) * this.speed;
+    this.position.y += Math.sin(this.angle) * this.speed;
     this.isOutsideScreen();
     if(shipHandler.IsBulletColliding(this, this.team))
     {
@@ -93,7 +93,7 @@ class Bullet
 
   getPos()
   {
-    return this.body.position;
+    return this.position;
   }
 
   getSize()
@@ -108,7 +108,7 @@ class Bullet
 
   isOutsideScreen()
   {
-    var pos = this.body.position;
+    var pos = this.position;
 
     // I used a 50 px border for this to make sure the bullet doesn't vanish on the edge of the screen
     if(pos.x <= -50 || pos.x >= width+50)
@@ -124,7 +124,7 @@ class Bullet
   destroyBullet()
   {
     bulletHandler.removebullet(this);
-    Matter.Composite.remove(world, this.body);
+    //Matter.Composite.remove(world, this.body);
     this.destroyed = true;
   }
 }

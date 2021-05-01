@@ -8,6 +8,6 @@ class LargeBullet extends Bullet
     this.w = 16;
     this.h = 6;
 
-    this.speed = 0.35; // 0.5 should be the the fastest speed
+    this.speed = 13; // 0.5 should be the the fastest speed
   }
 }

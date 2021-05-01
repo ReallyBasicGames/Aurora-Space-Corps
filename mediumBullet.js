@@ -8,6 +8,6 @@ class MediumBullet extends Bullet
     this.w = 12;
     this.h = 4;
 
-    this.speed = 0.35; // 0.5 should be the the fastest speed
+    this.speed = 15; 
   }
 }

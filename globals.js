@@ -42,3 +42,17 @@ let explosionSize = [0.2, 0.4, 0.6, 0.8, 1];
 let engineEffect;
 
 
+let missionsBeaten = 0;
+
+
+let missions = [];
+
+let aiCanUseSmall = true;
+let aiCanUseMedium = false;
+let aiCanUseLarge = false;
+let aiCanUseBoss = false;
+
+let playerCanUseSmall = true;
+let playerCanUseMedium = false;
+let playerCanUseLarge = false;
+let playerCanUseBoss = false;

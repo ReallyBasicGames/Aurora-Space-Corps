@@ -11,21 +11,21 @@ class Bullet
         x: x,
         y: y
     };
-    // var options = {
-    //   mass: 10,
-    //   friction: 0, // (0, 1)
-    //   restitution: .6,// bounciness (0, 1)
-    //   isSensor: true,
-    //   frictionAir: 0
-    // }
-    // this.body = Bodies.rectangle(x,y,this.w,this.h, options);
+    var options = {
+      mass: 10,
+      friction: 0, // (0, 1)
+      restitution: .6,// bounciness (0, 1)
+      isSensor: true,
+      frictionAir: 0
+    }
+    this.body = Bodies.rectangle(x,y,this.w,this.h, options);
 
-    // World.add(world, this.body);
-    // Matter.Body.setAngle(this.body, angle);
-    // Matter.Body.applyForce(this.body, this.body.position, {
-    //   x: cos(this.body.angle) * 0.5,
-    //   y: sin(this.body.angle) * 0.5
-    // });
+    World.add(world, this.body);
+    Matter.Body.setAngle(this.body, angle);
+    Matter.Body.applyForce(this.body, this.body.position, {
+      x: cos(this.body.angle) * 0.5,
+      y: sin(this.body.angle) * 0.5
+    });
     this.speed = 15;
     this.angle = angle;
     this.id = 0;
@@ -73,8 +73,10 @@ class Bullet
     }
     strokeWeight(1);
     push();
-    translate(this.position.x,this.position.y);
-    rotate(this.angle);
+    // translate(this.position.x,this.position.y);
+    translate(this.body.position.x,this.body.position.y);
+    // rotate(this.angle);
+    rotate(this.body.angle);
     rectMode(CENTER);
     rect(0, -this.h/2,this.w,this.h);
     pop();
@@ -82,8 +84,9 @@ class Bullet
 
   update()
   {
-    this.position.x += Math.cos(this.angle) * this.speed;
-    this.position.y += Math.sin(this.angle) * this.speed;
+    // this.position.x += Math.cos(this.angle) * this.speed;
+    // this.position.y += Math.sin(this.angle) * this.speed;
+
     this.isOutsideScreen();
     if(shipHandler.IsBulletColliding(this, this.team))
     {
@@ -93,7 +96,8 @@ class Bullet
 
   getPos()
   {
-    return this.position;
+    // return this.position;
+    return this.body.position;
   }
 
   getSize()
@@ -108,7 +112,8 @@ class Bullet
 
   isOutsideScreen()
   {
-    var pos = this.position;
+    // var pos = this.position;
+    var pos = this.body.position;
 
     // I used a 50 px border for this to make sure the bullet doesn't vanish on the edge of the screen
     if(pos.x <= -50 || pos.x >= width+50)
@@ -124,7 +129,7 @@ class Bullet
   destroyBullet()
   {
     bulletHandler.removebullet(this);
-    //Matter.Composite.remove(world, this.body);
+    Matter.Composite.remove(world, this.body);
     this.destroyed = true;
   }
 }

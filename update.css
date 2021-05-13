@@ -1,0 +1,35 @@
+.item1 { 
+    grid-area: header; 
+    font-size: 128px;
+}
+.item2 { 
+    grid-area: menu;
+    font-size: 30px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu menu menu menu menu menu';
+  grid-gap: 10px;
+  background-color: #444444;
+  padding: 10px;
+}
+
+
+.grid-container > div {
+    background-color: #222222;
+    font-family: 'Orbitron', sans-serif;
+    color: #555555;
+    text-align: center;
+    padding: 00px 0;
+    
+}
+
+body {
+    color: white;
+  background-color: #222222;
+  margin: auto;
+  font-family: 'Orbitron', sans-serif;
+ }

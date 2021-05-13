@@ -11,4 +11,4 @@ Inspired by [Pax Britannica](https://github.com/henkboom/pax-britannica).
 
 ##### Follow my progress!
 [Trello](https://trello.com/b/q7f7LnAK)
-[Discord](https://discord.gg/DTVfmZdQ)
+[Discord](https://discord.gg/CYV2jYBGJf)

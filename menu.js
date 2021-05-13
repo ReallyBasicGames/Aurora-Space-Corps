@@ -1,11 +1,17 @@
 let cnv;
 let viewportWidth;
+let mapSelectedImg;
+let mapUnselectedImg;
 
 function preload()
 {
     console.log("loading music...");
     bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
     clickEffect = loadSound("sounds/click1.ogg");
+    console.log("loading images...");
+    mapSelectedImg = loadImage("map_selected.png");
+    mapUnselectedImg = loadImage("map_unselected.png");
+    //loadImage('/images/small_' + i.toString() + '.png')
 }
 
 function setup() {
@@ -17,11 +23,30 @@ function setup() {
     background(0);
     loadOptions();
     viewportWidth = windowWidth;
+    loadStats();
+
+    if(window.location.pathname == "/missionRoom.html") 
+    {
+        loadMissions();
+    }
 }
 
 function draw()
 {
     if(!bgMusic.isPlaying() && soundLevel == 1) bgMusic.play();
+    if(window.location.pathname == "/missionRoom.html") displayMission();
+}
+
+function goToMenu()
+{
+    if(soundLevel == 1) clickEffect.play();
+    window.location.href = "test.html";
+}
+
+function goToMissionRoom()
+{
+    if(soundLevel == 1) clickEffect.play();
+    window.location.href = "missionRoom.html";
 }
 
 function windowResized() {
@@ -32,6 +57,8 @@ function windowResized() {
 
 function play() {
     if(soundLevel == 1) clickEffect.play();
+    storeItem("currentMission", missionSelected);
+    while(getItem("currentMission") == "null"){}
     window.location.href = "game.html";
 }
 
@@ -127,6 +154,7 @@ function clearStats() {
     storeItem("ties", 0);
     storeItem("shipsBuilt", 0);
     storeItem("shipsDestroyed", 0);
+    storeItem("missionsBeaten", 1);
     loadStats();
 }
 
@@ -161,6 +189,13 @@ function loadStats() {
         shipsBuilt = 0;
         storeItem("shipsBuilt", shipsBuilt);
     }
+
+    missionsBeaten = getItem('missionsBeaten');
+    if (missionsBeaten == null) {
+        missionsBeaten = 0;
+        storeItem("missionsBeaten", missionsBeaten);
+    }
+
 }
 
 function timeToString() {
@@ -279,5 +314,136 @@ function goToTrello()
 function goToDiscord()
 {
     if(soundLevel == 1) clickEffect.play();
-    window.open("https://discord.gg/DTVfmZdQ", '_blank');
+    window.open("https://discord.gg/CYV2jYBGJf", '_blank');
+}
+
+
+
+
+
+
+/*
+
+---------------- MISSIONS
+
+*/
+
+
+
+function loadMissions()
+{
+    totalMissions = 3;
+    for(var i = 0; i < totalMissions; i++)
+    {
+        var mission;
+        if(missionsBeaten >= i) mission = new ButtonMission(50+i*200, 50, 100, 100, mapSelectedImg, i, false);
+        else mission = new ButtonMission(50+i*200, 50, 100, 100, mapSelectedImg, i, true);
+        //mission = new ButtonMission(50+i*200, 50, 100, 100, mapSelectedImg, i+1, true);
+        missionButtons.push(mission);
+    }
+    missions.push(new MissionOne());
+    missions.push(new MissionTwo());
+    missions.push(new MissionThree());
+    console.log("missions loaded");
+}
+
+// display the missions on the canvas
+function displayMission(mission)
+{
+    // clear the bg
+    background(0);
+    // display each button
+    for(var i = 0; i < missionButtons.length; i++)
+    {
+        missionButtons[i].display();
+    }
+    if(mission == -1) document.getElementById("play").disabled = true;
+    else document.getElementById("play").disabled = false;
+    document.getElementById("details").innerHTML = missionDetailText;
+}
+
+function missionText()
+{
+    //console.log("mission selected: " + missionSelected.toString());
+    missionDetailText += missions[missionSelected].showMission();
+    missionDetailText += missions[missionSelected].showDifficulty();
+    missionDetailText += "<br>Completing this mission will unlock " + missions[missionSelected].unlock() + ".";
+    document.getElementById("details").innerHTML = missionDetailText;
+}
+
+// mission text variables
+let missionDetailText = "Select a mission below...";
+let missionSelected = -1;
+let missionButtons = [];
+
+function mouseClicked()
+{
+    for(var i = 0; i < missionButtons.length; i++)
+    {
+        if(missionButtons[i].over())
+        {
+            if(soundLevel == 1) clickEffect.play();
+            if(missionButtons[i].locked){
+                missionDetailText = "Details for mission " + (i+1).toString() + ":";
+                missionDetailText += "<br>This mission is locked. Complete prior missions to unlock this mission.<br><br><br><br><br><br>";
+                document.getElementById("details").innerHTML = missionDetailText;
+            }
+            else
+            {
+                missionSelected = missionButtons[i].clicked();
+                missionDetailText = "Details for mission " + (i+1).toString() + ":";
+                missionText();
+            }
+            break;
+        }
+    }
+    //missionDetailText = mouseX.toString() + ", " + mouseY.toString();
+}
+
+
+// BUTTON CLASS
+
+class ButtonMission {
+  
+  constructor(inX, inY, inW, inH, inImg, inMission, locked) {
+    this.x = inX;
+    this.y = inY;
+    this.img = inImg;
+    this.w = inW;
+    this.h = inH;
+    this.mission = inMission;
+    this.locked = locked;
+  }
+  
+  display() {
+    stroke(0);
+    
+    // tint the image on mouse hover
+    if (this.over()) {
+        noTint();
+    } else {
+        tint(100,100,100);
+    }
+    
+    image(this.img, this.x, this.y, this.w, this.h);
+  }
+
+  clicked()
+  {
+      return this.mission;
+  }
+
+  over() {
+      
+    if(mouseX > this.x && (mouseX < this.x + this.w))
+    {
+        //console.log((this.x + this.w).toString());
+        if(mouseY > this.y && (mouseY < this.y + this.h))
+        {
+            //console.log((this.y + this.h).toString());
+            return true;
+        }
+    }
+    return false;
+  }
 }

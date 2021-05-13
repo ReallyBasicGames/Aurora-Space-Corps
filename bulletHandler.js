@@ -8,7 +8,6 @@ function BulletHandler()
 
   this.isRemoving = false;
 
-
   this.debugBulletCount = function()
   {
     console.log(this.redBullets.length.toString());

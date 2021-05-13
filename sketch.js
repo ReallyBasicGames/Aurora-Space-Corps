@@ -23,6 +23,8 @@ var player;
 
 var ending = false;
 
+var currentMission;
+
 function preload() {
     console.log("loading images...");
     // load small fighters
@@ -45,6 +47,10 @@ function preload() {
     bgMusic = loadSound("sounds/Space_Ambient_Music.mp3");
     clickEffect = loadSound("sounds/click1.ogg");
     bulletEffect = loadSound("sounds/laser3.ogg");
+    console.log("loading mission...");
+    missions.push(new MissionOne());
+    missions.push(new MissionTwo());
+    missions.push(new MissionThree());
 }
 
 function loadOptions() {
@@ -59,6 +65,12 @@ function loadOptions() {
         storeItem("soundLevel", soundLevel);
     }
     if (soundLevel == 1) bgMusic.play();
+    
+    currentMission = getItem("currentMission");
+    if (currentMission == null) {
+        currentMission = 0;
+        storeItem("currentMission", currentMission);
+    }
 }
 
 function setup() {
@@ -73,8 +85,9 @@ function setup() {
     loadOptions();
     //startDebugGame();
     //startUnfair();
-    createFactoryShips();
+    //createFactoryShips();
     //testImages();
+    missions[currentMission].startMission(shipHandler, width, height);
 }
 
 function gameEnd() {
@@ -108,7 +121,7 @@ function gameEnd() {
         if (ties == null) storeItem("ties", 0);
         else storeItem("ties", ties);
     }
-    window.location.href = "test.html";
+    window.location.href = "missionRoom.html";
 }
 
 function draw() {

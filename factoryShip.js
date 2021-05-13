@@ -83,11 +83,11 @@ class FactoryShip extends Ship {
         // AI
         if (!this.isPlayerControlled) {
             super.update();
-            if (this.shipsBuilt[0] / 2 <= this.shipsBuilt[1]) {
+            if (this.shipsBuilt[0] / 2 <= this.shipsBuilt[1] && aiCanUseSmall) {
                 this.buy("small");
                 //if(!this.isPlayerControlled) console.log("buying small");
             }
-            else if (this.shipsBuilt[1] / 4 <= this.shipsBuilt[2]) {
+            else if (this.shipsBuilt[1] / 4 <= this.shipsBuilt[2] && aiCanUseMedium) {
                 if (this.upgradesGotten[0] * 6 < this.shipsBuilt[1]) {
                     this.upgrade("damage");
                     //if(!this.isPlayerControlled) console.log("upgrade damage");
@@ -97,7 +97,7 @@ class FactoryShip extends Ship {
                     //if(!this.isPlayerControlled) console.log("buying medium");
                 }
             }
-            else if (this.shipsBuilt[2] <= this.shipsBuilt[3] * 4) {
+            else if (this.shipsBuilt[2] <= this.shipsBuilt[3] * 4 && aiCanUseLarge) {
                 if (this.upgradesGotten[2] < 1) {
                     this.upgrade("power");
                     //if(!this.isPlayerControlled) console.log("upgrading power");
@@ -112,7 +112,7 @@ class FactoryShip extends Ship {
                 }
             }
             else {
-                if (this.upgradesGotten[2] < 3 || this.upgradesGotten < this.shipsBuilt[3] * 2) {
+                if (this.upgradesGotten[2] < 3 || this.upgradesGotten < this.shipsBuilt[3] * 2 && aiCanUseBoss) {
                     this.upgrade("power");
                     //if(!this.isPlayerControlled) console.log("upgrading power");
                 }
@@ -307,10 +307,10 @@ class FactoryShip extends Ship {
 
 function keyPressed() {
     // buy ships
-    if (keyIsDown(49)) player.buy("small");
-    if (keyIsDown(50)) player.buy("medium");
-    if (keyIsDown(51)) player.buy("large");
-    if (keyIsDown(52)) player.buy("boss");
+    if (keyIsDown(49) && playerCanUseSmall) player.buy("small");
+    if (keyIsDown(50) && playerCanUseMedium) player.buy("medium");
+    if (keyIsDown(51) && playerCanUseLarge) player.buy("large");
+    if (keyIsDown(52) && playerCanUseBoss) player.buy("boss");
     // buy upgrades, see constructor for what each do
     if (keyIsDown(56)) player.upgrade("damage");
     if (keyIsDown(57)) player.upgrade("health");

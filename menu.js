@@ -154,7 +154,7 @@ function clearStats() {
     storeItem("ties", 0);
     storeItem("shipsBuilt", 0);
     storeItem("shipsDestroyed", 0);
-    storeItem("missionsBeaten", 1);
+    storeItem("missionsBeaten", 0);
     loadStats();
 }
 

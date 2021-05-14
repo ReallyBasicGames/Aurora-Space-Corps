@@ -71,6 +71,12 @@ function loadOptions() {
         currentMission = 0;
         storeItem("currentMission", currentMission);
     }
+
+    missionsBeaten = getItem("missionsBeaten");
+    if (missionsBeaten == null) {
+        missionsBeaten = 0;
+        storeItem("missionsBeaten", missionsBeaten);
+    }
 }
 
 function setup() {
@@ -120,6 +126,10 @@ function gameEnd() {
     else {
         if (ties == null) storeItem("ties", 0);
         else storeItem("ties", ties);
+    }
+    if(currentMission >= missionsBeaten) {
+        missionsBeaten ++;
+        storeItem("missionsBeaten", missionsBeaten);
     }
     window.location.href = "missionRoom.html";
 }
